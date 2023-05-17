@@ -3,6 +3,12 @@ React Slide Demo
 
 A small code demo written in React 18 using functional components
 
+
+# To View
+
+Click the link: https://jasoncsmith.github.io/React-Slider-Demo/build/
+
+
 # To Run
 
     Install Node.js
