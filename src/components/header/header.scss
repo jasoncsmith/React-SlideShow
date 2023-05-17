@@ -1,0 +1,30 @@
+header {
+    text-align: center;
+
+    h1 {
+        color: #fff;
+        text-align: center;
+        margin: 0 0 5px 0;
+    }
+
+    p{
+        color: #fff;
+    }
+
+    span {
+        color: #ffa700;
+    }
+
+    .app-logo {
+        height: 100px;
+        animation: App-logo-spin infinite 20s linear;
+    }
+    @keyframes App-logo-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}

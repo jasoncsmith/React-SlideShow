@@ -1,0 +1,211 @@
+// jason's set sun angle
+@function setSunAngle($horiz: 0, $vert: 0) {
+    @return $horiz, $vert;
+}
+
+@mixin button($color: $red, $text_color: $white, $padding: 0.9em) {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: $padding 2em $padding;
+    // text-shadow: 0 1px 1px rgba(0,0,0,0.8);
+    @include rounded();
+    @include box-shadow(0, 1px, 2px, rgba(0, 0, 0, 0.8));
+
+    color: $text_color !important;
+    font-weight: bold;
+    border: solid 1px darken($color, 10%);
+    // background: $color;
+    @include gradient($color, darken($color, 10%)); //saturate($color, 15%), darken($color, 15%));
+    @include transition(all 0.3s);
+
+    &:hover {
+        text-decoration: none;
+        // background: saturate($color, 10%);
+        @include box-shadow(0, 1px, 1px, rgba(0, 0, 0, 0.8));
+        @include gradient(lighten($color, 5%), darken($color, 10%));
+    }
+
+    &:active {
+        position: relative;
+        // top: 1px;
+        color: saturate($color, 15%);
+        @include gradient(saturate($color, 15%), lighten($color, 15%));
+        @include remove-box-shadow();
+    }
+}
+
+@mixin drop-shadow($color: rgba(0, 0, 0, 0.2), $blur: 0, $x: 0, $y: 0) {
+    // color, blur, x, y
+    -ms-box-shadow: $x $y $blur $color; // IE10+
+    @if ($x == 0 and $y == 0) {
+        // non directional glow
+        filter: Glow(color=#{ie-hex-str($color)}, strength=#{numericvalue($blur)});
+        -ms-filter: glow(color=#{ie-hex-str($color)}, strength=#{numericvalue($blur)});
+    } @else {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=#{numericvalue($blur)}, Direction=#{degrees($x, $y)}, Color='#{ie-hex-str($color)}')"; // IE8
+        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=#{numericvalue($blur)}, Direction=#{degrees($x, $y)}, Color='#{ie-hex-str($color)}'); // IE7-
+    }
+    -o-box-shadow: $x $y $blur $color; // Opera
+    -moz-box-shadow: $x $y $blur $color; // Firefox
+    -webkit-box-shadow: $x $y $blur $color; // Webkit (Safari, Chrome, other)
+    box-shadow: $x $y $blur $color;
+}
+
+@mixin opacity($value: 0.5) {
+    -khtml-opacity: $value; //  khtml, old safari
+    -moz-opacity: $value; //  mozilla, netscape
+    opacity: $value; //  fx, safari, opera
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" $value * 100 ")";
+    filter: alpha(opacity= $value * 100); // internet explorer
+    zoom: 1;
+}
+
+@mixin vertical-gradient($startColor: #fff, $endColor: #333) {
+    background: $startColor; // fallback
+    background: -ms-linear-gradient(top, $startColor 0%, $endColor 100%); // IE 10+
+    background: -o-linear-gradient(top, $startColor 0%, $endColor 100%); // Opera
+    background: -moz-linear-gradient(top, $startColor 0%, $endColor 100%); // Firefox
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0%, $startColor),
+        color-stop(100%, $endColor)
+    ); // Webkit (Safari, Chrome, other)
+    background: -webkit-linear-gradient(top, $startColor 0%, $endColor 100%); // Webkit (Safari, Chrome, other)
+    background: linear-gradient(to bottom, $startColor 0%, $endColor 100%); // W3C
+    // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($startColor)}', endColorstr='#{ie-hex-str($endColor)}',GradientType=0 ); // IE 6-8
+}
+
+@mixin font-stack($primaryFont: "", $secondaryFont: "", $fallbackFonts: "Arial, Helvetica, sans-serif") {
+    //  might add inline-font-files() at some point
+    @if $secondaryFont != "" {
+        font-family: #{$primaryFont}, #{$secondaryFont}, #{$fallbackFonts};
+    } @else {
+        @if $primaryFont != "" {
+            font-family: #{$primaryFont}, #{$fallbackFonts};
+        } @else {
+            font-family: #{$fallbackFonts};
+        }
+    }
+}
+
+@mixin transition($transition: 0.2s) {
+    -ms-transition: all $transition ease-in-out; // IE10+
+    -o-transition: all $transition ease-in-out; // Opera
+    -moz-transition: all $transition ease-in-out; // Firefox
+    -webkit-transition: all $transition ease-in-out; // Webkit (Safari, Chrome, other)
+    transition: all $transition ease-in-out;
+}
+
+@mixin transition-with-options($option, $transition: 0.2s) {
+    -ms-transition: $option $transition ease-in-out; // IE10+
+    -o-transition: $option $transition ease-in-out; // Opera
+    -moz-transition: $option $transition ease-in-out; // Firefox
+    -webkit-transition: $option $transition ease-in-out; // Webkit (Safari, Chrome, other)
+    transition: $option $transition ease-in-out;
+}
+@mixin background-color($hex, $opacity) {
+    // http://css-tricks.com/ie-background-rgb-bug/
+    // rgba(#102030, 0.5) => rgba(16, 32, 48, 0.5)
+    background-color: $hex;
+    background-color: rgba($hex, $opacity);
+}
+
+@mixin border($params, $hex, $opacity) {
+    border: $params $hex;
+    border: $params rgba($hex, $opacity);
+}
+
+@mixin buttonToLink {
+    background: none !important;
+    background-color: transparent;
+    border: none;
+    padding: 0 !important;
+    color: $colorLink;
+    border-bottom: 1px solid $colorLink;
+    border-radius: 0;
+}
+
+@mixin box-shadow($shadow1, $shadow2: false, $shadow3: false, $shadow4: false, $shadow5: false) {
+    $params: $shadow1;
+    @if $shadow2 {
+        $params: $shadow1, $shadow2;
+    }
+    @if $shadow3 {
+        $params: $shadow1, $shadow2, $shadow3;
+    }
+    @if $shadow4 {
+        $params: $shadow1, $shadow2, $shadow3, $shadow4;
+    }
+    @if $shadow5 {
+        $params: $shadow1, $shadow2, $shadow3, $shadow4, $shadow5;
+    }
+
+    -webkit-box-shadow: $params;
+    -moz-box-shadow: $params;
+    box-shadow: $params;
+}
+
+@mixin box-sizing {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; //  Opera/IE 8+
+}
+
+// USER SELECT STOPS THE BLUE HIGHLIGHT COLOR ON CLICK
+@mixin disable-user-select {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+@mixin disable-copy {
+    // disables the ability to copy text on ios
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+@mixin placeholder-styles() {
+    ::-webkit-input-placeholder {
+        @content;
+    }
+    :-moz-placeholder {
+        @content;
+    } // Firefox 18-
+    ::-moz-placeholder {
+        @content;
+    } // Firefox 19+
+    :-ms-input-placeholder {
+        @content;
+    }
+
+    // for polyfill
+    .placeholder {
+        @content;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        height: auto;
+        display: none;
+        padding: 12px;
+        cursor: text;
+        line-height: 1.1;
+    }
+}
+
+@mixin transform($value) {
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -ms-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
