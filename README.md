@@ -11,8 +11,3 @@ A small code demo written in React 18 using functional components
     Command Prompt > npm i
     Command Prompt > npm run build
     Right click ./build/index.html and open with browser
-
-# To View
-Click the link: https://jasoncsmith.github.io/React-Slider-Demo/build/
-
-
