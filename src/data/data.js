@@ -17,7 +17,7 @@ export default [
             width: "100%",
             height: "360",
             alt: "Milliman Datalytics-Defense",
-            url: "images/feature/media_milliman.jpg",
+            name: "media_milliman.jpg",
         }   
     },
     {
@@ -37,7 +37,7 @@ export default [
             width: "100%",
             height: "360",
             alt: "oneWorld single page application",
-            url: "images/feature/media_oneWorld.jpg",
+            name: "media_oneWorld.jpg",
         }        
     },
     {
@@ -57,8 +57,8 @@ export default [
         image: {
             width: "100%",
             height: "360",
-            alt: "website home page",
-            url: "images/feature/media_prattPlus.jpg",
+            alt: "Pratt Plus ECommerce Site",
+            name: "media_prattPlus.jpg",
         }        
     },
     {
@@ -78,8 +78,8 @@ export default [
         image: {
             width: "100%",
             height: "360",
-            alt: "backbone.js project",
-            url: "images/feature/media_prattIndustries.jpg",
+            alt: "Pratt Industries Corporate Site",
+            name: "media_prattIndustries.jpg",
         }        
     },
     {
@@ -99,8 +99,8 @@ export default [
         image: {
             width: "100%",
             height: "360",
-            alt: "website home page",
-            url: "images/feature/media_webmd.jpg",
+            alt: "Sanford Health, Fit Initiative",
+            name: "media_webmd.jpg",
         }        
     },
     {
@@ -119,8 +119,8 @@ export default [
         image: {
             width: "100%",
             height: "360",
-            alt: "website home page",
-            url: "images/feature/media_holderProperties.jpg",
+            alt: "Condominium Rentals",
+            name: "media_holderProperties.jpg",
         }        
     },
     {
@@ -139,8 +139,8 @@ export default [
         image: {
             width: "100%",
             height: "360",
-            alt: "website home page",
-            url: "images/feature/media_hireGenics.jpg",
+            alt: "HireGenics Corporate Site",
+            name: "media_hireGenics.jpg",
         }        
     },
 ];

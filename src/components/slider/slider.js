@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import "./slider.scss";
-import data from "../../data/dataSlides.js";
+import "./caption.scss";
+import "./menuItem.scss";
+import data from "../../data/data.js";
 
 const MenuItem = ({ isActive, onMenuClick, slide }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -8,18 +10,23 @@ const MenuItem = ({ isActive, onMenuClick, slide }) => {
     return (
         <div
             className={isActive ? "menuItem menuItem--selected" : "menuItem"}
-            onClick={onMenuClick}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+            >
+            <button
+                type="button"
+                onClick={onMenuClick}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            ></button>
+
             {isHovered === true ? (
                 <div className="menuItem__thumbnail">
-                    <h5 dangerouslySetInnerHTML={{__html: slide.client}}></h5>
-                    <img 
+                    <h5 dangerouslySetInnerHTML={{ __html: slide.client }}></h5>
+                    <img
                         className="menuItem__img"
-                        src={slide.image.url}
+                        src={`images/${slide.image.name}`}
                         alt={slide.image.alt}
-                        height="100"
+                        title={slide.image.alt}
+                        height={100}
                     />
                 </div>
             ) : (
@@ -32,13 +39,27 @@ const MenuItem = ({ isActive, onMenuClick, slide }) => {
 const Caption = ({ slide }) => (
     <div className="caption-display__caption">
         <h5 className="caption__subtitle">Client</h5>
-        <p dangerouslySetInnerHTML={{__html:slide.client}}></p>
+        <p className="caption__client-name" dangerouslySetInnerHTML={{ __html: slide.client }}></p>
         <h5 className="caption__subtitle">Project</h5>
-        <p dangerouslySetInnerHTML={{__html: slide.projectName}} />
+        <p dangerouslySetInnerHTML={{ __html: slide.projectName }} />
         <h5 className="caption__subtitle">Skills</h5>
         <p>{slide.skills}</p>
     </div>
 );
+
+const Slide = ({ idx }) => {
+    const image = data[idx].image;
+
+    return (
+        <img
+            className="slider__slide"
+            src={`images/${image.name}`}
+            alt={image.alt}
+            title={image.alt}
+            height={350}
+        />
+    );
+};
 
 function Slider() {
     const timer = 3000;
@@ -56,7 +77,6 @@ function Slider() {
     const [isCaptionHiding, setIsCaptionHiding] = useState(false);
     const [isCaptionHidden, setIsCaptionHidden] = useState(false);
     const [isCaptionShowing, setIsCaptionShowing] = useState(false);
-
 
     const onMouseOver = () => {
         setIsHovered(true);
@@ -118,7 +138,7 @@ function Slider() {
         clearInterval(intervalRef.current);
         setIsPlaying(false);
     };
-    
+
     const next = useCallback(() => {
         if (isAnimating === true) {
             return;
@@ -172,10 +192,15 @@ function Slider() {
     ));
 
     return (
-        <main id="slider1" className="slider">
+        <div
+            id="slider1"
+            className="slider"
+        >
             <div
                 className={
-                    isCaptionHidden ? "slider__container slider__container--captions-hidden" : "slider__container"
+                    isCaptionHidden
+                        ? "slider__container slider__container--captions-hidden"
+                        : "slider__container"
                 }
                 onMouseOver={onMouseOver}
                 onMouseLeave={onMouseLeave}
@@ -184,46 +209,33 @@ function Slider() {
                     <div
                         className={
                             isAnimating
-                            ? "viewport__slides viewport__slides--is-animating-right"
-                            : isAnimatingLeft
-                            ? "viewport__slides viewport__slides--is-animating-left"
-                            : "viewport__slides"
+                                ? "viewport__slides viewport__slides--is-animating-right"
+                                : isAnimatingLeft
+                                ? "viewport__slides viewport__slides--is-animating-left"
+                                : "viewport__slides"
                         }
                     >
-                        <img
-                            src={data[prevIndex].image.url}
-                            alt={data[prevIndex].client}
-                            title={data[prevIndex].client}
-                            height={350}
-                        />
-                        <img
-                            src={data[viewingIndex].image.url}
-                            alt={data[viewingIndex].client}
-                            title={data[viewingIndex].client}
-                            height={350}
-                        />
-                        <img
-                            src={data[nextIndex].image.url}
-                            alt={data[nextIndex].client}
-                            title={data[nextIndex].client}
-                            height={350}
-                        />
+                        <Slide idx={prevIndex} />
+                        <Slide idx={viewingIndex} />
+                        <Slide idx={nextIndex} />
                     </div>
                 </div>
 
                 <nav>
-                    <div
+                    <button
+                        type="button"
                         className="nav__btn btn-prev"
                         onClick={previous}
                     >
                         &lsaquo;
-                    </div>
-                    <div
+                    </button>
+                    <button
+                        type="button"
                         className="nav__btn btn-next"
                         onClick={next}
                     >
                         &rsaquo;
-                    </div>
+                    </button>
                 </nav>
 
                 <div className="slider__controls">
@@ -264,13 +276,12 @@ function Slider() {
                         ? "slider__caption-display slider__caption-display--is-showing"
                         : "slider__caption-display"
                 }
-                
             >
                 <Caption slide={data[index]} />
-                
+
                 <div className="caption-display__links"></div>
             </div>
-        </main>
+        </div>
     );
 }
 

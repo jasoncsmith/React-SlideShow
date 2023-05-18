@@ -1,0 +1,50 @@
+@use "../../styles/mixins";
+@use "../../styles/global";
+
+.menuItem {
+    width: 15px;
+    height: 15px;
+    background-color: rgba(#FFF, 0.1);
+    margin: 0 16px 0 0;
+    cursor: pointer;
+    position: relative;
+    transition: all 200ms;
+    box-shadow: 1px -2px 2px rgba(255, 255, 255, 0.5) inset, -2px 2px 2px rgba(0, 0, 0, 0.8) inset;
+    border-radius: 50%;
+    @include mixins.disable-user-select();
+
+    button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+
+    &:hover {
+        background-color: global.$gold;
+    }
+}
+.menuItem__thumbnail {
+    h5 {
+        margin: 0 0 5px 0;
+        color:#FFF;
+    }
+    img {
+        border-radius: 4px;
+    }
+    position: absolute;
+    top: 16px;
+    left: 25px;
+    border-radius: 2px;
+}
+.menuItem--selected {
+    background-color: global.$gold;
+    button {
+        cursor: default;
+    }
+}
+.menuItem--selected:hover {
+    background-color: global.$gold;
+}

@@ -1,7 +1,7 @@
 # ReactSliderDemo
 React Slide Demo
 
-A small code demo written in React 18 using functional components
+A small custom code demo written in React 18 using functional components
 
 
 # To View
@@ -9,7 +9,7 @@ A small code demo written in React 18 using functional components
 Click the link: https://jasoncsmith.github.io/React-Slider-Demo/build/
 
 
-# To Run
+# To Run Locally
 
     Install Node.js
     Clone project
@@ -17,3 +17,12 @@ Click the link: https://jasoncsmith.github.io/React-Slider-Demo/build/
     Command Prompt > npm i
     Command Prompt > npm run build
     Right click ./build/index.html and open with browser
+
+    OR
+
+    Command Prompt > npm i
+    Command Prompt > npm run start
+
+# TODO
+
+Convert to TypeScript
