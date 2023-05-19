@@ -135,10 +135,9 @@ function Slider() {
             idx = index - 1;
         }
 
-        setViewingIndex(index);
         setPrevIndex(idx);
         setIndex(idx);
-
+        
         setIsAnimatingLeft(true);
         setTimeout(() => {
             setViewingIndex(idx);
@@ -157,7 +156,6 @@ function Slider() {
             idx = index + 1;
         }
 
-        setViewingIndex(index);
         setNextIndex(idx);
         setIndex(idx);
 

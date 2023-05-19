@@ -58,14 +58,14 @@
 }
 .caption--is-updating h5,
 .caption--is-updating p {
-    animation: fadeInOut 0.6s both;
+    animation: fadeCaptionInOut .6s ease-out;
 }
 
-@keyframes fadeInOut {
+@keyframes fadeCaptionInOut {
     0% {
         opacity: 1;
     }
-    50% {
+    80% {
         opacity: 0;
     }
     100% {

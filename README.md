@@ -1,5 +1,5 @@
 # React Slider Demo
-A small custom code demo written in React 18 using functional components
+A small custom code demo written in React 18 using functional components.
 
 # To View
 
