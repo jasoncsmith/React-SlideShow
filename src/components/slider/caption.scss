@@ -12,9 +12,7 @@
     background: url(../../assets/bg-slider-responsive-2.jpg) no-repeat 100% 0;
 
     border-radius: 4px;
-    box-shadow:
-        -20px 28px 20px rgba(0, 0, 0, 0.8),
-        7px -5px 5px rgba(0, 0, 0, 0.5) inset,
+    box-shadow: -20px 28px 20px rgba(0, 0, 0, 0.8), 7px -5px 5px rgba(0, 0, 0, 0.5) inset,
         -5px 5px 4px rgba(255, 255, 211, 0.3) inset;
 
     p {
@@ -24,10 +22,10 @@
     }
 }
 .slider__caption-display--is-hiding {
-    animation: 0.5s ease-in-out 0s hideCaptions 1;
+    animation: 0.5s ease-in-out 0s hideCaptions;
 }
 .slider__caption-display--is-showing {
-    animation: 0.5s ease-in-out 0s showCaptions 1;
+    animation: 0.5s ease-in-out 0s showCaptions;
 }
 .slider__caption-display--is-hidden {
     left: -35%;
@@ -39,15 +37,16 @@
     padding: 8px 13px;
     background-color: #000;
     border-radius: 9px;
-    color: #Fbfbfb;
+    color: #fbfbfb;
     box-shadow: -2px 3px 4px rgba(#000, 1) inset;
     background: #000000;
     background: linear-gradient(45deg, #000000 47%, #4a4a4a 93%, #4a4a4a 100%);
 
     p {
-        color:#fdfdfd;
+        color: #fdfdfd;
         margin: 0;
         padding: 0 0 7px 2px;
+        opacity: 1;
     }
 }
 .caption__subtitle {
@@ -57,7 +56,22 @@
 .caption__client-name {
     font-weight: bold;
 }
+.caption--is-updating h5,
+.caption--is-updating p {
+    animation: fadeInOut 0.6s both;
+}
 
+@keyframes fadeInOut {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 @keyframes hideCaptions {
     from {

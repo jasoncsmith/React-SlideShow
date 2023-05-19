@@ -1,7 +1,6 @@
 @use "../../styles/mixins";
 @use "../../styles/global";
 
-
 .slider {
     display: flex;
     width: 915px;
@@ -12,7 +11,7 @@
         background: url(../../assets/bg-slider-responsive-2.jpg) no-repeat 0 0;
         margin: 0 0 100px 0;
         z-index: 2;
-        
+
         transition: transform 0.25s ease-in-out;
         border-radius: 10px;
         box-shadow: 7px -5px 5px rgba(0, 0, 0, 0.5) inset, -5px 5px 4px rgba(255, 255, 211, 0.3) inset;
@@ -20,7 +19,6 @@
     .slider__container--captions-hidden {
         transform: translate(30%, 0);
     }
-
 
     .slider__viewport {
         overflow: hidden;
@@ -39,17 +37,17 @@
         left: -100%;
     }
     .viewport__slides--is-animating-right {
-        animation: 0.4s ease-in-out 0s slide-right infinite;
+        animation: 0.4s ease-in-out 0s slide-right;
     }
     .viewport__slides--is-animating-left {
-        animation: 0.4s ease-in-out 0s slide-left infinite;
+        animation: 0.4s ease-in-out 0s slide-left;
     }
 
     img {
         outline: none;
         @include mixins.disable-user-select();
     }
-    
+
     .btn {
         cursor: pointer;
         line-height: 1;
@@ -101,7 +99,7 @@
         line-height: 1;
         border: 1px solid #000;
         border-radius: 4px;
-        color: #EEE;
+        color: #eee;
         font-size: 12px;
         background: linear-gradient(45deg, #111 60%, #747474);
         text-align: center;
@@ -110,7 +108,7 @@
 
         &:hover {
             box-shadow: 0px 0px 5px 0px #c0ba87cc inset;
-            border-color: #A8A8A8;   
+            border-color: #a8a8a8;
         }
     }
 
@@ -130,7 +128,7 @@
         padding: 0 0 0 10px;
         margin-top: 1px;
         background-color: rgba(#000, 0.4);
-        box-shadow: 1px -2px 2px rgba(255, 255, 211, 0.5) inset, -3px 2px 3px rgba(0, 0, 0, 0.8) inset ;
+        box-shadow: 1px -2px 2px rgba(255, 255, 211, 0.5) inset, -3px 2px 3px rgba(0, 0, 0, 0.8) inset;
         border-radius: 15px;
     }
 
@@ -166,5 +164,4 @@
             left: 0;
         }
     }
-
 }

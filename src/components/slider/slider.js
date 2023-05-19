@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import "./slider.scss";
-import "./caption.scss";
-import "./menuItem.scss";
-import data from "../../data/data.js";
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import './slider.scss';
+import './caption.scss';
+import './menuItem.scss';
+import data from '../../data/data.js';
 
 const MenuItem = ({ isActive, onMenuClick, slide }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div
-            className={isActive ? "menuItem menuItem--selected" : "menuItem"}
-            >
+        <div className={isActive ? 'menuItem menuItem--selected' : 'menuItem'}>
             <button
                 type="button"
                 onClick={onMenuClick}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-            ></button>
+            >
+                {slide.image.alt}
+            </button>
 
             {isHovered === true ? (
                 <div className="menuItem__thumbnail">
@@ -30,16 +30,25 @@ const MenuItem = ({ isActive, onMenuClick, slide }) => {
                     />
                 </div>
             ) : (
-                ""
+                ''
             )}
         </div>
     );
 };
 
-const Caption = ({ slide }) => (
-    <div className="caption-display__caption">
+const Caption = ({ isUpating, slide }) => (
+    <div
+        className={
+            isUpating
+                ? 'caption-display__caption caption--is-updating'
+                : 'caption-display__caption'
+        }
+    >
         <h5 className="caption__subtitle">Client</h5>
-        <p className="caption__client-name" dangerouslySetInnerHTML={{ __html: slide.client }}></p>
+        <p
+            className="caption__client-name"
+            dangerouslySetInnerHTML={{ __html: slide.client }}
+        ></p>
         <h5 className="caption__subtitle">Project</h5>
         <p dangerouslySetInnerHTML={{ __html: slide.projectName }} />
         <h5 className="caption__subtitle">Skills</h5>
@@ -72,7 +81,7 @@ function Slider() {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
+    const [isAnimatingRight, setIsAnimatingRight] = useState(false);
     const [isAnimatingLeft, setIsAnimatingLeft] = useState(false);
     const [isCaptionHiding, setIsCaptionHiding] = useState(false);
     const [isCaptionHidden, setIsCaptionHidden] = useState(false);
@@ -103,32 +112,6 @@ function Slider() {
         }, 450);
     };
 
-    const previous = () => {
-        if (isAnimatingLeft === true) {
-            return;
-        }
-
-        let idx = null;
-        let idxViewing = null;
-
-        if (index === 0) {
-            idx = data.length - 1;
-            idxViewing = 0;
-        } else {
-            idx = index - 1;
-            idxViewing = index;
-        }
-        setIndex(idx);
-        setViewingIndex(idxViewing);
-        setPrevIndex(idx);
-
-        setIsAnimatingLeft(true);
-        setTimeout(() => {
-            setIsAnimatingLeft(false);
-            setViewingIndex(idx);
-        }, duration);
-    };
-
     const goto = (idx) => {
         setIndex(idx);
         setViewingIndex(idx);
@@ -139,40 +122,55 @@ function Slider() {
         setIsPlaying(false);
     };
 
-    const next = useCallback(() => {
-        if (isAnimating === true) {
+    const previous = () => {
+        if (isAnimatingLeft === true) {
             return;
         }
 
         let idx = null;
-        let idxViewing = null;
 
-        if (index === data.length - 1) {
-            idx = 0;
-            idxViewing = data.length - 1;
+        if (index === 0) {
+            idx = data.length - 1;
         } else {
-            idx = index + 1;
-            idxViewing = index;
+            idx = index - 1;
         }
 
+        setViewingIndex(index);
+        setPrevIndex(idx);
         setIndex(idx);
-        setViewingIndex(idxViewing);
-        setNextIndex(idx);
-        setIsAnimating(true);
+
+        setIsAnimatingLeft(true);
         setTimeout(() => {
-            setIsAnimating(false);
             setViewingIndex(idx);
+            setTimeout(setIsAnimatingLeft, 250, false); // setTimeout fixes jank in Edge
         }, duration);
-    }, [index, isAnimating]);
+    };
+
+    const next = useCallback(() => {
+        if (isAnimatingRight === true) {
+            return;
+        }
+        let idx = null;
+        if (index === data.length - 1) {
+            idx = 0;
+        } else {
+            idx = index + 1;
+        }
+
+        setViewingIndex(index);
+        setNextIndex(idx);
+        setIndex(idx);
+
+        setIsAnimatingRight(true);
+        setTimeout(() => {
+            setViewingIndex(idx);
+            setTimeout(setIsAnimatingRight, 250, false); // setTimeout fixes jank in Edge
+        }, duration);
+    }, [index, isAnimatingRight]);
 
     const play = useCallback(() => {
         setIsPlaying(true);
-
-        let intervalId = setTimeout(() => {
-            next();
-        }, timer);
-
-        intervalRef.current = intervalId;
+        intervalRef.current = setTimeout(next, timer);
     }, [next]);
 
     useEffect(() => {
@@ -199,8 +197,8 @@ function Slider() {
             <div
                 className={
                     isCaptionHidden
-                        ? "slider__container slider__container--captions-hidden"
-                        : "slider__container"
+                        ? 'slider__container slider__container--captions-hidden'
+                        : 'slider__container'
                 }
                 onMouseOver={onMouseOver}
                 onMouseLeave={onMouseLeave}
@@ -208,11 +206,11 @@ function Slider() {
                 <div className="slider__viewport">
                     <div
                         className={
-                            isAnimating
-                                ? "viewport__slides viewport__slides--is-animating-right"
+                            isAnimatingRight
+                                ? 'viewport__slides viewport__slides--is-animating-right'
                                 : isAnimatingLeft
-                                ? "viewport__slides viewport__slides--is-animating-left"
-                                : "viewport__slides"
+                                ? 'viewport__slides viewport__slides--is-animating-left'
+                                : 'viewport__slides'
                         }
                     >
                         <Slide idx={prevIndex} />
@@ -227,14 +225,14 @@ function Slider() {
                         className="nav__btn btn-prev"
                         onClick={previous}
                     >
-                        &lsaquo;
+                        Previous
                     </button>
                     <button
                         type="button"
                         className="nav__btn btn-next"
                         onClick={next}
                     >
-                        &rsaquo;
+                        Next
                     </button>
                 </nav>
 
@@ -242,7 +240,7 @@ function Slider() {
                     <div className="controls__slider-menu">
                         {menuItems}
                         <div className="slider-menu__play-state">
-                            {isPlaying === true ? "Playing" : "Paused"}
+                            {isPlaying === true ? 'Playing' : 'Paused'}
                         </div>
                     </div>
 
@@ -269,15 +267,18 @@ function Slider() {
             <div
                 className={
                     isCaptionHiding
-                        ? "slider__caption-display slider__caption-display--is-hiding"
+                        ? 'slider__caption-display slider__caption-display--is-hiding'
                         : isCaptionHidden
-                        ? "slider__caption-display slider__caption-display--is-hidden"
+                        ? 'slider__caption-display slider__caption-display--is-hidden'
                         : isCaptionShowing
-                        ? "slider__caption-display slider__caption-display--is-showing"
-                        : "slider__caption-display"
+                        ? 'slider__caption-display slider__caption-display--is-showing'
+                        : 'slider__caption-display'
                 }
             >
-                <Caption slide={data[index]} />
+                <Caption
+                    isUpating={isAnimatingRight | isAnimatingLeft}
+                    slide={data[viewingIndex]}
+                />
 
                 <div className="caption-display__links"></div>
             </div>
