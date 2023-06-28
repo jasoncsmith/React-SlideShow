@@ -22,4 +22,4 @@ Click the link: https://jasoncsmith.github.io/React-Slider-Demo/build/
 
 # TODO
 
-Convert to TypeScript
+Implement keyboard interface controls
