@@ -1,10 +1,11 @@
 @use "../../styles/mixins";
-@use "../../styles/global";
+@use "../../styles/colors";
 
 .slider {
     display: flex;
     width: 915px;
     margin: 0 auto;
+    $widthViewPort: 495px;
 
     .slider__container {
         position: relative;
@@ -22,7 +23,7 @@
 
     .slider__viewport {
         overflow: hidden;
-        width: 495px;
+        width: $widthViewPort;
         height: 350px;
         margin: 25px 45px 0 45px;
         border-radius: 9px;
@@ -32,7 +33,7 @@
     .viewport__slides {
         position: relative;
         display: flex;
-        width: min-content;
+        width: calc($widthViewPort * 3);
         height: 100%;
         left: -100%;
     }
@@ -45,6 +46,7 @@
 
     img {
         outline: none;
+        // max-width: inherit;
         @include mixins.disable-user-select();
     }
 
@@ -135,14 +137,16 @@
     .slider-menu__play-state {
         width: 55px;
         height: 18px;
+        line-height: 15px;
 
         text-align: center;
         font-style: italic;
         padding: 0 0 5px 0;
-        border-radius: 5px 14px 14px 5px;
+        margin-right: 6px;
+        border-radius: 5px 18px 18px 5px;
 
         font-size: 12px;
-        color: global.$gold;
+        color: colors.$gold;
         background-color: rgba(#000, 0.3);
     }
 
@@ -151,8 +155,7 @@
             left: -100%;
         }
         to {
-            left: 100%;
-            transform: translateX(-100%);
+            transform: translateX(-$widthViewPort);
         }
     }
 

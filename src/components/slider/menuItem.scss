@@ -1,12 +1,11 @@
 @use "../../styles/mixins";
-@use "../../styles/global";
+@use "../../styles/colors";
 
 .menuItem {
     width: 15px;
     height: 15px;
     background-color: transparent;
     margin: 0 16px 0 0;
-    cursor: pointer;
     position: relative;
     transition: all 200ms;
     box-shadow: 1px -2px 2px rgba(255, 255, 255, 0.5) inset, -2px 2px 2px rgba(0, 0, 0, 0.8) inset;
@@ -19,33 +18,46 @@
         left: 0;
         width: 100%;
         height: 100%;
+        cursor: pointer;
         background-color: transparent;
         text-indent: -9999px;
     }
 
     &:hover {
-        background-color: global.$gold;
+        background-color: colors.$gold;
     }
 }
+
 .menuItem__thumbnail {
+    width: 200px;
     h5 {
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+        font-size: 14px;
+        padding: 4px;
         margin: 0 0 5px 0;
         color: #fff;
     }
     img {
         border-radius: 4px;
+        border: 1px solid #ddd;
+        outline: none;
     }
+    outline: none;
     position: absolute;
     top: 16px;
     left: 25px;
     border-radius: 2px;
 }
+
 .menuItem--selected {
-    background-color: global.$gold;
+    background-color: colors.$gold;
     button {
         cursor: default;
     }
 }
+
 .menuItem--selected:hover {
-    background-color: global.$gold;
+    background-color: colors.$gold;
 }
