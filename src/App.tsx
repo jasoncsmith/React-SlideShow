@@ -1,5 +1,5 @@
-import Header from "./components/header/header";
-import Slider from "./components/slider/slider";
+import Header from './components/Header';
+import Slider from './components/Slider';
 
 const App = () => (
     <div className="app">

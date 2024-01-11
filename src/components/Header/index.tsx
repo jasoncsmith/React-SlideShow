@@ -1,5 +1,5 @@
-import logo from "../../assets/logo.svg";
-import "./header.scss";
+import logo from '../../assets/logo.svg';
+import './index.scss';
 
 const Header = () => (
     <header className="app__header">

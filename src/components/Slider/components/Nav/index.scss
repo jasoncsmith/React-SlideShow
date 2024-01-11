@@ -1,0 +1,40 @@
+@use "/src/styles/mixins";
+
+.slider__nav {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    margin-top: -28px;
+    width: 93.5%;
+    height: 56px;
+    z-index: 1;
+    @include mixins.disable-user-select();
+
+    &__btn {
+        width: 56px;
+        height: 56px;
+        text-indent: -9999px;
+    }
+
+    &__btn--prev {
+        background: url(../../../../assets/ui_slider_buttons_sprite.png) no-repeat 0 -224px;
+        transition: margin 200ms;
+
+        &:hover {
+            background-position: 0 -280px;
+            margin-left: -2px;
+        }
+    }
+
+    &__btn--next {
+        background: url(../../../../assets/ui_slider_buttons_sprite.png) no-repeat -61px -224px;
+        transition: margin 200ms;
+
+        &:hover {
+            background-position: -61px -280px;
+            margin-right: -2px;
+        }
+    }
+}

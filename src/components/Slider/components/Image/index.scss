@@ -1,0 +1,8 @@
+@use "/src/styles/mixins";
+@use "/src/styles/colors";
+
+.slider__slide {
+    outline: none;
+    // max-width: inherit;
+    @include mixins.disable-user-select();
+}

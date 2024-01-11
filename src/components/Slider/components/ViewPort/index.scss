@@ -1,0 +1,51 @@
+@use "/src/styles/mixins";
+@use "/src/styles/colors";
+
+.slider__viewport {
+    $widthViewPort: 495px;
+
+    overflow: hidden;
+    width: $widthViewPort;
+    height: 350px;
+    margin: 25px 45px 0 45px;
+    border-radius: 9px;
+    background: #000 url(../../../../assets/loader/loader-o-yellow.gif) no-repeat 50% 50%;
+    box-shadow:
+        -3px 4px 1px rgba(255, 255, 211, 0.3),
+        4px -4px 1px rgba(0, 0, 0, 0.5);
+
+    &__slides {
+        position: relative;
+        display: flex;
+        width: calc($widthViewPort * 3);
+        height: 100%;
+        left: -100%;
+    }
+
+    &__slides--is-animating-right {
+        // animation: play .8s steps(10) forwards;
+        animation: slide-right 0.4s steps(100) forwards;
+    }
+    &__slides--is-animating-left {
+        // animation: 0.4s ease-in-out 0s slide-left;
+        animation: slide-left 0.4s steps(100) forwards;
+    }
+
+    @keyframes slide-right {
+        from {
+            left: -100%;
+        }
+        to {
+            transform: translateX(-$widthViewPort);
+        }
+    }
+
+    @keyframes slide-left {
+        from {
+            left: -100%;
+        }
+        to {
+            left: 0;
+        }
+    }
+}

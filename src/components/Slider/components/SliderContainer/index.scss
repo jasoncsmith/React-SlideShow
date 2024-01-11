@@ -1,0 +1,16 @@
+.slider__container {
+    position: relative;
+    background: url(../../../../assets/bg-slider-responsive-2.jpg) no-repeat 0 0;
+    margin: 0 0 100px 0;
+    z-index: 2;
+
+    transition: transform 0.25s ease-in-out;
+    border-radius: 10px;
+    box-shadow:
+        7px -5px 5px rgba(0, 0, 0, 0.5) inset,
+        -5px 5px 4px rgba(255, 255, 211, 0.3) inset;
+
+    &--captions-hidden {
+        transform: translate(30%, 0);
+    }
+}

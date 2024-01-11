@@ -1,6 +1,28 @@
+// interface DataModel {
+//   [key: string]: string | number | {}
+// }
+
 const data = [
     {
-        id: 0,
+        client: 'AutoNation',
+        clientId: 'auto_nation',
+        year: 2023,
+        url: '//www.autonationmobility.com',
+        role: 'Frontend Engineer',
+        projectName: 'Online Automotive Shopping',
+        projectDescription: 'Online Automotive Shopping',
+        fragment: '#/work/autonation',
+        skills: 'React, NextJs, MobX, TypeScript, Modular SCSS, Node.js, Azure DevOps, GIT',
+        software: 'Visual Studio, SQL Server Management Studio',
+        longDesc: '<p>Banged out code</p>',
+        image: {
+            width: '100%',
+            height: '360',
+            alt: 'AutoNation Mobility',
+            name: 'media-autonation-mobility.jpg',
+        },
+    },
+    {
         client: 'Milliman',
         clientId: 'milliman',
         year: 2023,
@@ -20,7 +42,6 @@ const data = [
         },
     },
     {
-        id: 1,
         client: 'Innovata LLC.',
         clientId: 'innovata',
         year: 2013,
@@ -41,7 +62,6 @@ const data = [
         },
     },
     {
-        id: 2,
         client: 'Pratt Plus',
         clientId: 'prattPlus',
         year: 2012,
@@ -63,7 +83,6 @@ const data = [
         },
     },
     {
-        id: 3,
         client: 'Pratt Industries Inc.',
         clientId: 'prattIndustries',
         year: 2012,
@@ -85,7 +104,6 @@ const data = [
         },
     },
     {
-        id: 4,
         client: 'WebMd',
         clientId: 'webMd',
         year: 2011,
@@ -107,7 +125,6 @@ const data = [
         },
     },
     {
-        id: 6,
         client: 'AboveMedia',
         clientId: 'aboveMedia',
         year: 2010,
@@ -128,7 +145,6 @@ const data = [
         },
     },
     {
-        id: 5,
         client: 'Holder Properties',
         clientId: 'holderProperties',
         year: 2010,
@@ -148,7 +164,11 @@ const data = [
             name: 'media_holderProperties.jpg',
         },
     },
-];
+    // ].map((d: DataModel, idx: number) => {
+].map((d, idx) => {
+    d.id = idx + 1;
+    return d;
+});
 
-export default data;
-// module.exports = data;
+// export default data
+module.exports = data;
